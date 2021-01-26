@@ -17,6 +17,6 @@ app.get('/api/products/:id', (req, res) => {
   res.send(product)
 })
 
-app.listen(3000, () => {
-  console.log('App running at: http://localhost:3000')
+app.listen(5000, () => {
+  console.log('App running at: http://localhost:5000')
 })
