@@ -17,6 +17,11 @@ app.get('/api/products/:id', (req, res) => {
   res.send(product)
 })
 
-app.listen(5000, () => {
-  console.log('App running at: http://localhost:5000')
+// 从文件加载环境变量
+const dotenv = require('dotenv')
+dotenv.config()
+const PORT = process.env.PORT || 5000
+
+app.listen(PORT, () => {
+  console.log(`App running at ${process.env.NODE_ENV}: http://localhost:${process.env.PORT}`)
 })
