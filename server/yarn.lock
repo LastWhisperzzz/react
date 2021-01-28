@@ -173,6 +173,11 @@ etag@~1.8.1:
   resolved "https://registry.npm.taobao.org/etag/download/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
+express-async-handler@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/express-async-handler/download/express-async-handler-1.1.4.tgz#225a84908df63b35ae9df94b6f0f1af061266426"
+  integrity sha1-IlqEkI32OzWunflLbw8a8GEmZCY=
+
 express@^5.0.0-alpha.8:
   version "5.0.0-alpha.8"
   resolved "https://registry.npm.taobao.org/express/download/express-5.0.0-alpha.8.tgz?cache=0&sync_timestamp=1596722127254&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fexpress%2Fdownload%2Fexpress-5.0.0-alpha.8.tgz#b9dd3a568eab791e3391db47f9e6ab91e61b13fe"
