@@ -1,8 +1,9 @@
 const express = require('express')
 const cors = require('cors')
-
-// 从文件加载环境变量
 const dotenv = require('dotenv')
+const connectDB = require('./plugins/db')
+
+// 从.env文件加载环境变量
 dotenv.config()
 const PORT = process.env.PORT || 5000
 const products = require('./data/products')
@@ -14,7 +15,7 @@ app.use(cors())
 app.use(express.json())
 
 // 连接数据库
-require('./plugins/db')()
+connectDB()
 
 app.get('/api/products', (req, res) => {
   res.send(products)
