@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const connectDB = require('./plugins/db')
+const colors = require('colors')
 
 // 从.env文件加载环境变量
 dotenv.config()
@@ -26,5 +27,7 @@ app.get('/api/products/:id', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`App running in ${process.env.NODE_ENV} at: http://localhost:${process.env.PORT}`)
+  console.log(
+    `App running in ${process.env.NODE_ENV} at: http://localhost:${process.env.PORT}`.yellow.bold
+  )
 })

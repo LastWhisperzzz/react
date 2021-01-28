@@ -7,9 +7,11 @@ const connectDB = async () => {
       useCreateIndex: true,
       useUnifiedTopology: true
     })
-    console.log(`MongoDB Connected at: ${connect.connection.host}:${connect.connection.port}`)
+    console.log(
+      `MongoDB Connected at: ${connect.connection.host}:${connect.connection.port}`.cyan.underline
+    )
   } catch (error) {
-    console.log(`Error: ${error.message}`)
+    console.log(`Error: ${error.message}`.red.underline.bold)
     process.exit(1)
   }
 }
