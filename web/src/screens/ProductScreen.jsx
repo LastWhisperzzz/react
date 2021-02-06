@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Image, ListGroup, Card, Button, ListGroupItem } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import axios from 'axios'
 
+// 产品详情页
 const ProductScreen = ({ match }) => {
   const [product, setProduct] = useState({})
+
   useEffect(() => {
     const fetchProduct = async () => {
       const { data } = await axios.get(`/api/products/${match.params.id}`)
@@ -15,7 +17,7 @@ const ProductScreen = ({ match }) => {
   }, [match])
 
   return (
-    <div>
+    <>
       <Link className="btn btn-dark my-3" to="/">
         返回主页
       </Link>
@@ -49,10 +51,7 @@ const ProductScreen = ({ match }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>库存:</Col>
-                  <Col>
-                    {/* <strong>{product.countInStock}</strong> */}
-                    {product.countInStock > 0 ? '有货' : '无货'}
-                  </Col>
+                  <Col>{product.countInStock > 0 ? '有货' : '无货'}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -64,7 +63,7 @@ const ProductScreen = ({ match }) => {
           </Card>
         </Col>
       </Row>
-    </div>
+    </>
   )
 }
 
