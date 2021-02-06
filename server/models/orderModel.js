@@ -2,11 +2,7 @@ const mongoose = require('mongoose')
 
 const orderSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'User'
-    },
+    user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
     // 订单
     orderItems: [
       {
@@ -25,10 +21,7 @@ const orderSchema = new mongoose.Schema(
       postalCode: { type: String, required: true }
     },
     // 支付方式
-    paymentMethod: {
-      type: String,
-      required: true
-    },
+    paymentMethod: { type: String, required: true },
     // 支付结果
     paymentResult: {
       id: { type: String },

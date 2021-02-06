@@ -26,9 +26,7 @@ const importData = async () => {
     const createdUsers = await User.insertMany(users)
     const adminUser = createdUsers[0]._id //获取管理员id
     // 添加user字段
-    const sampleProducts = products.map(product => {
-      return { ...product, user: adminUser }
-    })
+    const sampleProducts = products.map(product => ({ ...product, user: adminUser }))
     await Product.insertMany(sampleProducts)
 
     console.log('样本数据插入成功!'.green.inverse)

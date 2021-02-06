@@ -11,17 +11,19 @@ connectDB() // 连接数据库
 
 const app = express()
 app.use(cors()) // 跨域
-app.use(express.json()) // 将请求转为json
+app.use(express.json()) // 将请求解析为json
 
+// 路由
 app.use('/api/products', productRoutes)
 
-//错误处理中间件
+// 错误处理中间件
 app.use(notFound)
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
+const HOST = process.env.HOST || ''
 app.listen(PORT, () => {
   console.log(
-    `App running in ${process.env.NODE_ENV} at: http://localhost:${process.env.PORT}`.yellow.bold
+    `App running in ${process.env.NODE_ENV} at: http://${HOST ? HOST : 'localhost'}:${PORT}`.yellow
   )
 })
