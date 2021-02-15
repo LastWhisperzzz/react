@@ -16,7 +16,7 @@ app.use(express.json()) // 将请求解析为json
 
 // 路由
 app.use('/api/products', productRoutes)
-app.use('/api/user', userRoutes)
+app.use('/api/users', userRoutes)
 
 // 错误处理中间件
 app.use(notFound)
