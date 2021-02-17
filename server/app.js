@@ -6,6 +6,7 @@ const connectDB = require('./plugins/db')
 const colors = require('colors')
 const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
+const orderRoutes = require('./routes/orderRoutes')
 
 dotenv.config() // 从.env文件加载环境变量
 connectDB() // 连接数据库
@@ -17,6 +18,7 @@ app.use(express.json()) // 将请求解析为json
 // 路由
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/orders', orderRoutes)
 
 // 错误处理中间件
 app.use(notFound)
