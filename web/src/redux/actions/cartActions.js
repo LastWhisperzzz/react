@@ -39,3 +39,9 @@ export const saveShippingAddress = data => async dispatch => {
   dispatch({ type: CART_SAVE_SHIPPING_ADDRESS, payload: data })
   localStorage.setItem('shippingAddress', JSON.stringify(data))
 }
+
+//保存支付方式action
+export const savePaymentMethod = data => async dispatch => {
+  dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: data })
+  localStorage.setItem('paymentMethod', JSON.stringify(data))
+}
