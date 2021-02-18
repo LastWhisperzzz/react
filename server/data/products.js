@@ -28,7 +28,7 @@ const products = [
     image: '/images/iphone-12pro.jpg',
     description:
       'iPhone 12 Pro尺寸为6.1英寸，采用了Super Retina XDR屏幕，iPhone 4风格直角金属中框。iPhone 12 Pro起售价999美元。于2020年10月16日开始预订，10月23日上市。',
-    brand: 'Apple',
+    brand: '苹果',
     category: '电子产品',
     price: 8499,
     countInStock: 10,

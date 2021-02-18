@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware')
@@ -7,6 +8,7 @@ const colors = require('colors')
 const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
 const orderRoutes = require('./routes/orderRoutes')
+const uploadRoutes = require('./routes/uploadRoutes')
 
 dotenv.config() // 从.env文件加载环境变量
 connectDB() // 连接数据库
@@ -19,6 +21,10 @@ app.use(express.json()) // 将请求解析为json
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/upload', uploadRoutes)
+
+// upload文件夹作为静态文件
+app.use('/upload', express.static(__dirname + '/uploads'))
 
 // 错误处理中间件
 app.use(notFound)
