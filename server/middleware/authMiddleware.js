@@ -24,4 +24,14 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 })
 
-module.exports = protect
+// 验证是否为管理员
+const admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next()
+  } else {
+    res.status(401)
+    throw new Error('不是被授权的管理员')
+  }
+}
+
+module.exports = { protect, admin }
