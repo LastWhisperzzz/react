@@ -9,6 +9,7 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer
 } from './reducers/userReducers'
+import { orderCreateReducer } from './reducers/orderReducers'
 
 // 汇总reducer
 const reducer = combineReducers({
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
-  userUpdateProfile: userUpdateProfileReducer
+  userUpdateProfile: userUpdateProfileReducer,
+  orderCreate: orderCreateReducer
 })
 
 //获取本地存储的购物车信息

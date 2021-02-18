@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import {createOrder} from '../redux/actions/orderAction';
 import { Form, Button, ListGroup, Row, Col, Image, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
@@ -8,6 +9,15 @@ import CheckoutSteps from '../components/CheckoutSteps'
 const PlaceorderPage = ({ history }) => {
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
+  const orderCreate = useSelector((state) => state.orderCreate)
+  const { order, success, error } = orderCreate
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`)
+    }
+    // eslint-disable-next-line
+  }, [history, success])
 
   // 保留两位小数
   const addDecimals = (num) => {
@@ -22,7 +32,18 @@ const PlaceorderPage = ({ history }) => {
     Number(cart.itemsPrice) + Number(cart.shippingPrice)
   )
   // 提交订单函数
-  const placeorderHandler = () => {}
+  const placeorderHandler = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        totalPrice: cart.totalPrice,
+      })
+    )
+  }
 
   return (
     <>
@@ -94,6 +115,9 @@ const PlaceorderPage = ({ history }) => {
                   <Col>订单总价</Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button type='button' className='btn-block' onClick={placeorderHandler} disabled={cart.cartItems === 0} >提交订单</Button>
