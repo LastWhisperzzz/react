@@ -5,7 +5,9 @@ const Product = require('../models/productModel')
 //@route   GET/api/products?keyword=${keyword}
 //@access  公开
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find()
+  const keyword = req.query.keyword ? { name: { $regex: req.query.keyword, $options: 'i' } } : {}
+
+  const products = await Product.find({ ...keyword })
   res.send(products)
 })
 
@@ -80,4 +82,48 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 })
 
-module.exports = { getProducts, getProductById, deleteProduct, createProduct, updateProduct }
+//@desc    创建产品评论
+//@route   POST/api/products/reviews/:id
+//@access  私密
+const createProductReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    //判断用户是否已经评论
+    const alreadeReviewed = product.reviews.find(
+      review => review.user.toString() === req.user._id.toString()
+    )
+    if (alreadeReviewed) {
+      res.status(400)
+      throw new Error('您已经评论过该产品！')
+    }
+    //创建新评论
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id
+    }
+    product.reviews.push(review)
+    //更新产品的评论数及总评分
+    product.numReviews = product.reviews.length
+    product.rating =
+      product.reviews.reduce((acc, review) => acc + review.rating, 0) / product.reviews.length
+
+    await product.save()
+    res.status(201).json({ message: '评论成功' })
+  } else {
+    res.status(404)
+    throw new Error('查询不到产品')
+  }
+})
+
+module.exports = {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+  createProductReview
+}

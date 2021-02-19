@@ -5,7 +5,8 @@ const {
   getProductById,
   deleteProduct,
   createProduct,
-  updateProduct
+  updateProduct,
+  createProductReview
 } = require('../controllers/productController')
 const { protect, admin } = require('../middleware/authMiddleware')
 
@@ -15,5 +16,6 @@ router
   .get(getProductById)
   .delete(protect, admin, deleteProduct)
   .put(protect, admin, updateProduct)
+router.route('/reviews/:id').post(protect, createProductReview)
 
 module.exports = router

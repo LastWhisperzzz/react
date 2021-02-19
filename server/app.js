@@ -10,6 +10,7 @@ const userRoutes = require('./routes/userRoutes')
 const orderRoutes = require('./routes/orderRoutes')
 const uploadRoutes = require('./routes/uploadRoutes')
 const axios = require('axios')
+const morgan = require('morgan')
 
 dotenv.config() // 从.env文件加载环境变量
 connectDB() // 连接数据库
@@ -17,6 +18,10 @@ connectDB() // 连接数据库
 const app = express()
 app.use(cors()) // 跨域
 app.use(express.json()) // 将请求解析为json
+// 打印请求到控制台
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
 
 // 路由
 app.use('/api/products', productRoutes)
