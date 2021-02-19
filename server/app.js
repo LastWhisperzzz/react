@@ -9,6 +9,7 @@ const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
 const orderRoutes = require('./routes/orderRoutes')
 const uploadRoutes = require('./routes/uploadRoutes')
+const axios = require('axios')
 
 dotenv.config() // 从.env文件加载环境变量
 connectDB() // 连接数据库
@@ -25,6 +26,13 @@ app.use('/api/upload', uploadRoutes)
 
 // upload文件夹作为静态文件
 app.use('/upload', express.static(__dirname + '/uploads'))
+
+//获取支付的status状态码
+app.get('/status', (req, res) => {
+  axios.get('https://www.thenewstep.cn/pay/logs/log.txt').then(response => {
+    res.json({ status: response.data })
+  })
+})
 
 // 错误处理中间件
 app.use(notFound)
