@@ -8,7 +8,19 @@ import {
   ORDER_DETAILS_FAIL,
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
-  ORDER_LIST_FAIL
+  ORDER_LIST_FAIL,
+  ORDER_PAY_REQUEST,
+  ORDER_PAY_SUCCESS,
+  ORDER_PAY_FAIL,
+  ORDER_PAY_RESET,
+  ORDER_LIST_MY_REQUEST,
+  ORDER_LIST_MY_SUCCESS,
+  ORDER_LIST_MY_FAIL,
+  ORDER_LIST_MY_RESET,
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_SUCCESS,
+  ORDER_DELIVER_FAIL,
+  ORDER_DELIVER_RESET
 } from '../constants/orderContants'
 
 // 创建订单reducer
@@ -53,6 +65,54 @@ export const orderListReducer = (state = { orders: [] }, action) => {
       return { loading: false, orders: action.payload }
     case ORDER_LIST_FAIL:
       return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+//订单支付后更新订单的付款状态reducer
+export const orderPayReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_PAY_REQUEST:
+      return { loading: true }
+    case ORDER_PAY_SUCCESS:
+      return { loading: false, success: true }
+    case ORDER_PAY_FAIL:
+      return { loading: false, error: action.payload }
+    case ORDER_PAY_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+
+//订单支付后更新订单的发货状态reducer
+export const orderDeliverReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_DELIVER_REQUEST:
+      return { loading: true }
+    case ORDER_DELIVER_SUCCESS:
+      return { loading: false, success: true }
+    case ORDER_DELIVER_FAIL:
+      return { loading: false, error: action.payload }
+    case ORDER_DELIVER_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+
+//获取登录用户订单的reducer
+export const orderListMyReducer = (state = { orders: [] }, action) => {
+  switch (action.type) {
+    case ORDER_LIST_MY_REQUEST:
+      return { loading: true }
+    case ORDER_LIST_MY_SUCCESS:
+      return { loading: false, orders: action.payload }
+    case ORDER_LIST_MY_FAIL:
+      return { loading: false, error: action.payload }
+    case ORDER_LIST_MY_RESET:
+      return { orders: [] }
     default:
       return state
   }
