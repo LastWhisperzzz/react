@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { addOrderItems, getOrderById } = require('../controllers/orderContorller')
-const { protect } = require('../middleware/authMiddleware')
+const { addOrderItems, getOrderById, getOrders } = require('../controllers/orderContorller')
+const { protect, admin } = require('../middleware/authMiddleware')
 
-router.route('/').post(protect, addOrderItems)
+router.route('/').post(protect, addOrderItems).get(protect, admin, getOrders)
 router.route('/:id').get(protect, getOrderById)
 
 module.exports = router

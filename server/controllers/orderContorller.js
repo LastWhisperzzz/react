@@ -46,4 +46,12 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 })
 
-module.exports = { addOrderItems, getOrderById }
+//@desc    获取所有订单
+//@route   GET/api/orders
+//@access  私密(仅限管理员)
+const getOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({}).populate('user', 'id name')
+  res.json(orders)
+})
+
+module.exports = { addOrderItems, getOrderById, getOrders }
