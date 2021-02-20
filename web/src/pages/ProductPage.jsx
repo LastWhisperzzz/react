@@ -6,7 +6,10 @@ import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { PRODUCT_CREATE_RESET } from '../redux/constants/productConstants'
+import {
+  PRODUCT_DETAILS_RESET,
+  PRODUCT_CREATE_REVIEW_RESET
+} from '../redux/constants/productConstants'
 
 // 产品详情页
 const ProductScreen = ({ history, match }) => {

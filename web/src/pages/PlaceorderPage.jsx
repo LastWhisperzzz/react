@@ -5,6 +5,8 @@ import { createOrder } from '../redux/actions/orderAction'
 import { Form, Button, ListGroup, Row, Col, Image, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
+import { ORDER_CREATE_RESET } from '../redux/constants/orderContants'
+import { USER_DETAILS_RESET } from '../redux/constants/userConstants'
 
 // 确认订单页面
 const PlaceorderPage = ({ history }) => {
@@ -16,6 +18,8 @@ const PlaceorderPage = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`)
+      dispatch({ type: ORDER_CREATE_RESET })
+      dispatch({ type: USER_DETAILS_RESET })
     }
     // eslint-disable-next-line
   }, [history, success])

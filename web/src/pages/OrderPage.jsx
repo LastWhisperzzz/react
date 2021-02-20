@@ -10,7 +10,7 @@ import moduleName from 'module'
 import { v4 as uuidv4 } from 'uuid'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../redux/constants/orderContants'
 
-// 订单页面
+// 订单详情页面
 const OrderPage = ({ match, history }) => {
   const orderId = match.params.id
   const dispatch = useDispatch()
