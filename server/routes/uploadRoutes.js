@@ -40,7 +40,10 @@ const upload = multer({
 
 //创建文件上传路由
 router.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`)
+  const file = req.file
+  file.url = `http://localhost:3000/uploads/${file.filename}`
+  res.send(file)
+  // res.send(`/${req.file.path}`)
 })
 
 module.exports = router

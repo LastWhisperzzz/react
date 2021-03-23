@@ -30,7 +30,7 @@ app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
 
 // upload文件夹作为静态文件
-app.use('/upload', express.static(__dirname + '/uploads'))
+app.use('/uploads', express.static(__dirname + '/uploads'))
 
 //获取支付的status状态码
 app.get('/status', (req, res) => {

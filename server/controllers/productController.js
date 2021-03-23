@@ -6,7 +6,7 @@ const Product = require('../models/productModel')
 //@access  公开
 const getProducts = asyncHandler(async (req, res) => {
   //每页展示的产品数量
-  const pageSize = 6
+  const pageSize = 8
   const page = Number(req.query.pageNumber) || 1
 
   const keyword = req.query.keyword ? { name: { $regex: req.query.keyword, $options: 'i' } } : {}
@@ -131,7 +131,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 //@route   GET/api/products/top
 //@access  公开
 const getTopProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).sort({ price: 1 }).limit(3)
+  const products = await Product.find({}).sort({ price: -1 }).limit(3)
 
   res.json(products)
 })
